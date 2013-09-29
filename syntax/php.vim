@@ -3,7 +3,8 @@
 " Maintainer: Paul Garvin <paul@paulgarvin.net>
 " Contributor: Stan Angeloff <stanimir@angeloff.name>
 " URL: https://github.com/StanAngeloff/php.vim
-"
+" 
+" Modifier: friparia<friparia@gmail.com> wdjwxh<wdjwxh@gmail.com>
 " Former Maintainer:  Peter Hodge <toomuchphp-vim@yahoo.com>
 " Former URL: http://www.vim.org/scripts/script.php?script_id=1571
 "
