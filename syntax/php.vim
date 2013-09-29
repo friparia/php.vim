@@ -105,8 +105,62 @@ syn keyword phpServerVars GATEWAY_INTERFACE SERVER_NAME SERVER_SOFTWARE SERVER_P
 
 " === BEGIN BUILTIN FUNCTIONS, CLASSES, AND CONSTANTS ===================================
 
-syn case match
 
+syn case match
+syn match   jQuery          /jQuery\|\$/
+
+
+syn match   jFunc           /\.\w\+(\@=/ contains=@jFunctions
+
+syn cluster jFunctions      contains=jAjax,jAttributes,jCore,jCSS,jData,jDeferred,jDimensions,jEffects,jEvents,jManipulation,jMiscellaneous,jOffset,jProperties,jTraversing,jUtilities
+syn keyword jAjax           contained ajaxComplete ajaxError ajaxSend ajaxStart ajaxStop ajaxSuccess
+syn keyword jAjax           contained param serialize serializeArray
+syn keyword jAjax           contained ajax ajaxPrefilter ajaxSetup ajaxSettings ajaxTransport
+syn keyword jAjax           contained get getJSON getScript load post
+syn keyword jAttributes     contained addClass attr hasClass prop removeAttr removeClass removeProp toggleClass val
+syn keyword jCore           contained holdReady noConflict sub when
+syn keyword jCSS            contained css cssHooks
+syn keyword jData           contained clearQueue data dequeue hasData queue removeData
+syn keyword jDeferred       contained Deferred always done fail isRejected isResolved pipe promise reject rejectWith resolved resolveWith then
+syn keyword jDimensions     contained height innerHeight innerWidth outerHeight outerWidth width
+syn keyword jEffects        contained hide show toggle
+syn keyword jEffects        contained animate delay stop
+syn keyword jEffects        contained fadeIn fadeOut fadeTo fadeToggle
+syn keyword jEffects        contained slideDown slideToggle slideUp
+syn keyword jEvents         contained error resize scroll
+syn keyword jEvents         contained ready unload
+syn keyword jEvents         contained bind delegate die live one proxy trigger triggerHandler unbind undelegate
+syn keyword jEvents         contained Event currentTarget isDefaultPrevented isImmediatePropagationStopped isPropagationStopped namespace pageX pageY preventDefault relatedTarget result stopImmediatePropagation stopPropagation target timeStamp which
+syn keyword jEvents         contained blur change focus select submit
+syn keyword jEvents         contained focusin focusout keydown keypress keyup
+syn keyword jEvents         contained click dblclick hover mousedown mouseenter mouseleave mousemove mouseout mouseover mouseup
+syn keyword jManipulation   contained clone
+syn keyword jManipulation   contained unwrap wrap wrapAll wrapInner
+syn keyword jManipulation   contained append appendTo html preprend prependTo text
+syn keyword jManipulation   contained after before insertAfter insertBefore
+syn keyword jManipulation   contained detach empty remove
+syn keyword jManipulation   contained replaceAll replaceWith
+syn keyword jMiscellaneous  contained index size toArray
+syn keyword jOffset         contained offset offsetParent position scrollTop scrollLeft
+syn keyword jProperties     contained browser context fx.interval fx.off length selector support
+syn keyword jTraversing     contained eq filter first has is last map not slice
+syn keyword jTraversing     contained add andSelf contents end
+syn keyword jTraversing     contained children closest find next nextAll nextUntil parent parents parentsUntil prev prevAll prevUntil siblings
+syn keyword jUtilities      contained each extend globalEval grep inArray isArray isEmptyObject isFunction isPlainObject isWindow isXMLDoc makeArray merge noop now parseJSON parseXML trim type unique
+
+
+syn region  javaScriptStringD          start=+"+  skip=+\\\\\|\\"+  end=+"\|$+  contains=javaScriptSpecial,@htmlPreproc,@jSelectors
+syn region  javaScriptStringS          start=+'+  skip=+\\\\\|\\'+  end=+'\|$+  contains=javaScriptSpecial,@htmlPreproc,@jSelectors
+
+syn cluster jSelectors      contains=jId,jClass,jOperators,jBasicFilters,jContentFilters,jVisibility,jChildFilters,jForms,jFormFilters
+syn match   jId             contained /#[0-9A-Za-z_\-]\+/
+syn match   jClass          contained /\.[0-9A-Za-z_\-]\+/
+syn match   jOperators      contained /*\|>\|+\|-\|\~/
+syn match   jBasicFilters   contained /:\(animated\|eq\|even\|first\|focus\|gt\|header\|last\|lt\|not\|odd\)/
+syn match   jChildFilters   contained /:\(first\|last\|nth\|only\)-child/
+syn match   jContentFilters contained /:\(contains\|empty\|has\|parent\)/
+syn match   jForms          contained /:\(button\|checkbox\|checked\|disabled\|enabled\|file\|image\|input\|password\|radio\|reset\|selected\|submit\|text\)/
+syn match   jVisibility     contained /:\(hidden\|visible\)/
 " Core
 syn keyword phpConstants E_ERROR E_RECOVERABLE_ERROR E_WARNING E_PARSE E_NOTICE E_STRICT E_DEPRECATED E_CORE_ERROR E_CORE_WARNING E_COMPILE_ERROR E_COMPILE_WARNING E_USER_ERROR E_USER_WARNING E_USER_NOTICE E_USER_DEPRECATED E_ALL DEBUG_BACKTRACE_PROVIDE_OBJECT DEBUG_BACKTRACE_IGNORE_ARGS TRUE FALSE NULL ZEND_THREAD_SAFE ZEND_DEBUG_BUILD PHP_VERSION PHP_MAJOR_VERSION PHP_MINOR_VERSION PHP_RELEASE_VERSION PHP_EXTRA_VERSION PHP_VERSION_ID PHP_ZTS PHP_DEBUG PHP_OS PHP_SAPI DEFAULT_INCLUDE_PATH PEAR_INSTALL_DIR PEAR_EXTENSION_DIR PHP_EXTENSION_DIR PHP_PREFIX PHP_BINDIR PHP_MANDIR PHP_LIBDIR PHP_DATADIR PHP_SYSCONFDIR PHP_LOCALSTATEDIR PHP_CONFIG_FILE_PATH PHP_CONFIG_FILE_SCAN_DIR PHP_SHLIB_SUFFIX PHP_EOL PHP_MAXPATHLEN PHP_INT_MAX PHP_INT_SIZE PHP_BINARY PHP_OUTPUT_HANDLER_START PHP_OUTPUT_HANDLER_WRITE PHP_OUTPUT_HANDLER_FLUSH PHP_OUTPUT_HANDLER_CLEAN PHP_OUTPUT_HANDLER_FINAL PHP_OUTPUT_HANDLER_CONT PHP_OUTPUT_HANDLER_END PHP_OUTPUT_HANDLER_CLEANABLE PHP_OUTPUT_HANDLER_FLUSHABLE PHP_OUTPUT_HANDLER_REMOVABLE PHP_OUTPUT_HANDLER_STDFLAGS PHP_OUTPUT_HANDLER_STARTED PHP_OUTPUT_HANDLER_DISABLED UPLOAD_ERR_OK UPLOAD_ERR_INI_SIZE UPLOAD_ERR_FORM_SIZE UPLOAD_ERR_PARTIAL UPLOAD_ERR_NO_FILE UPLOAD_ERR_NO_TMP_DIR UPLOAD_ERR_CANT_WRITE UPLOAD_ERR_EXTENSION STDIN STDOUT STDERR contained
 
@@ -530,6 +584,33 @@ if !exists("did_php_syn_inits")
   hi def link phpParentError      Error
   hi def link phpOctalError       Error
   hi def link phpTodo             Todo
+  hi def link jQuery          Constant
+
+  hi def link jAjax           Function
+  hi def link jAttributes     Function
+  hi def link jCore           Function
+  hi def link jCSS            Function
+  hi def link jData           Function
+  hi def link jDeferred       Function
+  hi def link jDimensions     Function
+  hi def link jEffects        Function
+  hi def link jEvents         Function
+  hi def link jManipulation   Function
+  hi def link jMiscellaneous  Function
+  hi def link jOffset         Function
+  hi def link jProperties     Function
+  hi def link jTraversing     Function
+  hi def link jUtilities      Function
+
+  hi def link jId             Identifier
+  hi def link jClass          Constant
+  hi def link jOperators      Special
+  hi def link jBasicFilters   Statement
+  hi def link jContentFilters Statement
+  hi def link jVisibility     Statement
+  hi def link jChildFilters   Statement
+  hi def link jForms          Statement
+  hi def link jFormFilters    Statement
 
 endif
 
