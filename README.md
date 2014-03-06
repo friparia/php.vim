@@ -11,6 +11,7 @@ php.vim syntax file distributed with Vim. Whew!
 
 Improvements
 ------------
+test
 
 - Spell checking was enabled in strings and comments (both single and
   multi-line).
